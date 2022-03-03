@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+    title: Auth API
+    description: "This is a sample server Petstore server. You can find out more about Swagger
+        at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For
+        this sample, you can use the api key special-key to test the authorization     filters."
+    termsOfService: http://swagger.io/terms/
+    contact:
+        email: contact@authic.dev
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
+    version: 1.0.0
+paths:
+    /v1/increment/{number}:
+        post:
+            summary: Increments input number and displays example output.
+            operationId: increment
+            parameters:
+                - in: path
+                  name: number
+                  schema:
+                      type: number
+                  required: true
+                  description: Number to increment
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                oneOf:
+                                    - type: object
+                                      properties:
+                                          environment:
+                                              type: string
+                                              description: Display which environment is used.
+                                          "num+1":
+                                              type: string
+                                              description: The incremented request number.
+                                    - type: object
+                                      properties:
+                                          environment:
+                                              type: string
+                                              description: Display which environment is used.
+                                          "num+1":
+                                              type: string
+                                              description: The incremented request number.
+                                          onlyInSandbox:
+                                              type: string
+                                              description: Value only present in sandbox environment.
+
+                500:
+                    description: Internal exception
+                    content: {}
+            x-codegen-request-body-name: body
